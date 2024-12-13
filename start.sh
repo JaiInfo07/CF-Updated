@@ -13,6 +13,7 @@ fi
 
 # Set appropriate permissions
 chmod 644 "${NEO_SECURITY_PATH}"
+echo "neo-security.xml generated successfully!"
 
 # Start ColdFusion in the background
 echo "Starting ColdFusion server..."
@@ -26,9 +27,11 @@ sleep 60
 echo "Setting up datasource..."
 curl -X POST http://localhost:8500/WEB-INF/datasource.cfm
 if [ $? -ne 0 ]; then
-    echo "Datasource setup failed!"
+    echo "Datasource setup failed! Check ColdFusion logs."
     exit 1
 fi
+echo "Datasource setup completed successfully!"
 
-# Tail logs to keep the container running
+# Keep the container running by tailing ColdFusion logs
+echo "Tailing ColdFusion logs..."
 tail -f /opt/coldfusion/cfusion/logs/coldfusion-out.log
