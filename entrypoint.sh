@@ -1,17 +1,5 @@
 #!/bin/bash
 
-# Reset the admin password using an `expect` script if not already done
-if [ ! -f /opt/coldfusion/cfusion/password_initialized ]; then
-    echo "Resetting ColdFusion admin password..."
-    /opt/coldfusion/cfusion/bin/passwordreset.sh << EOF
-Admin@123
-Admin@123
-EOF
-    # Create a flag file to ensure this script doesn't re-run
-    touch /opt/coldfusion/cfusion/password_initialized
-    echo "Admin password reset completed."
-fi
-
 # Start ColdFusion in the background
 /opt/coldfusion/cfusion/bin/coldfusion start
 
@@ -36,5 +24,5 @@ curl -X POST http://localhost:8500/WEB-INF/datasource.cfm || {
     exit 1
 }
 
-# Keep the container alive and log ColdFusion output
+# Keep the container alive
 tail -f /opt/coldfusion/cfusion/logs/coldfusion-out.log /opt/coldfusion/cfusion/logs/server.log
