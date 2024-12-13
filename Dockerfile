@@ -29,7 +29,7 @@ COPY server.xml /opt/coldfusion/cfusion/runtime/conf/server.xml
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install sqlserver debugger image mail
 
 # Copy additional configuration files and scripts
-COPY neo-security.xml.template /opt/coldfusion/cfusion/lib/neo-security.xml.template
+COPY neo-security.xml.template /opt/coldfusion/cfusion/runtime/conf/neo-security.xml.template
 COPY datasource.cfm /opt/coldfusion/cfusion/wwwroot/WEB-INF/datasource.cfm
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
