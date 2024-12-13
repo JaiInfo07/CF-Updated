@@ -10,7 +10,7 @@ ENV acceptEULA=YES \
 WORKDIR /opt/coldfusion/cfusion/wwwroot
 
 # Update apt and install utilities
-RUN apt-get update && apt-get install -y unzip vim curl && \
+RUN apt-get update && apt-get install -y expect unzip vim curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy the build.zip file into the container
@@ -24,12 +24,16 @@ RUN unzip /tmp/build.zip -d /tmp/build && \
 # Copy configuration files
 # COPY neo-security.xml /opt/coldfusion/cfusion/lib/neo-security.xml
 COPY server.xml /opt/coldfusion/cfusion/runtime/conf/server.xml
+COPY passwordreset.sh /opt/coldfusion/cfusion/bin/
+RUN chmod +x /opt/coldfusion/cfusion/bin/passwordreset.sh
+RUN /opt/coldfusion/cfusion/bin/passwordreset_expect.sh
 
 # Install necessary ColdFusion packages
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install sqlserver   
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install debugger
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install image
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install mail
+
 
 # Copy datasource setup script
 COPY datasource.cfm /opt/coldfusion/cfusion/wwwroot/WEB-INF/datasource.cfm
