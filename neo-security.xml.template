@@ -1,5 +1,0 @@
-<wddxPacket version='1.0'><header/><data><struct type='coldfusion.server.ConfigMap'>
-    <var name='admin.userid.root'><string>${ADMIN_USER}</string></var>
-    <var name='admin.security.enabled'><boolean value='${SECURITY_ENABLED}'/></var>
-    <var name='secureprofile.enabled'><boolean value='${SECURE_PROFILE}'/></var>
-</struct></data></wddxPacket>
