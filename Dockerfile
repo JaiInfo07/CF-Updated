@@ -22,21 +22,19 @@ RUN unzip /tmp/build.zip -d /tmp/build && \
     rm -rf /tmp/build /tmp/build.zip
 
 # Copy configuration files
-COPY neo-security.xml /opt/coldfusion/cfusion/lib/neo-security.xml
 COPY server.xml /opt/coldfusion/cfusion/runtime/conf/server.xml
 
 # Install necessary ColdFusion packages
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install sqlserver debugger image mail
 
-# Copy datasource setup script
+# Copy additional configuration files and scripts
+COPY neo-security.xml.template /opt/coldfusion/cfusion/lib/neo-security.xml.template
 COPY datasource.cfm /opt/coldfusion/cfusion/wwwroot/WEB-INF/datasource.cfm
-
-# Copy entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Expose ColdFusion server port
 EXPOSE 8500
 
 # Set the entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/start.sh"]
