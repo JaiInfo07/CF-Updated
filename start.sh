@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Define the path for neo-security.xml
-NEO_SECURITY_PATH="/opt/coldfusion/cfusion/runtime/conf/neo-security.xml"
+NEO_SECURITY_PATH="/opt/coldfusion/cfusion/lib/neo-security.xml"
 
 # Dynamically generate neo-security.xml based on the template
 echo "Generating neo-security.xml..."
-envsubst < /opt/coldfusion/cfusion/runtime/conf/neo-security.xml.template > "${NEO_SECURITY_PATH}"
+envsubst < /opt/coldfusion/cfusion/lib/neo-security.xml.template > "${NEO_SECURITY_PATH}"
 if [ $? -ne 0 ]; then
     echo "Failed to generate neo-security.xml"
     exit 1
