@@ -26,7 +26,7 @@ RUN unzip /tmp/build.zip -d /tmp/build && \
 COPY server.xml /opt/coldfusion/cfusion/runtime/conf/server.xml
 COPY passwordreset.sh /opt/coldfusion/cfusion/bin/
 RUN chmod +x /opt/coldfusion/cfusion/bin/passwordreset.sh
-RUN /opt/coldfusion/cfusion/bin/passwordreset_expect.sh
+RUN /opt/coldfusion/cfusion/bin/passwordreset.sh
 
 # Install necessary ColdFusion packages
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install sqlserver   
