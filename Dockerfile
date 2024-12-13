@@ -22,28 +22,25 @@ RUN unzip /tmp/build.zip -d /tmp/build && \
     rm -rf /tmp/build /tmp/build.zip
 
 # Copy configuration files
-# COPY neo-security.xml /opt/coldfusion/cfusion/lib/neo-security.xml
 COPY server.xml /opt/coldfusion/cfusion/runtime/conf/server.xml
-COPY passwordreset.sh /opt/coldfusion/cfusion/bin/
+# COPY neo-security.xml /opt/coldfusion/cfusion/lib/neo-security.xml
+
+# Copy and configure the password reset script
+COPY passwordreset.sh /opt/coldfusion/cfusion/bin/passwordreset.sh
 RUN chmod +x /opt/coldfusion/cfusion/bin/passwordreset.sh
-RUN /opt/coldfusion/cfusion/bin/passwordreset.sh
 
 # Install necessary ColdFusion packages
-RUN /opt/coldfusion/cfusion/bin/cfpm.sh install sqlserver   
+RUN /opt/coldfusion/cfusion/bin/cfpm.sh install sqlserver
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install debugger
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install image
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install mail
 
-
-# Copy datasource setup script
-COPY datasource.cfm /opt/coldfusion/cfusion/wwwroot/WEB-INF/datasource.cfm
-
-# Copy entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 # Expose ColdFusion server port
 EXPOSE 8500
 
-# Set the entrypoint
+# Copy and set entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# ENTRYPOINT Section
 ENTRYPOINT ["/entrypoint.sh"]
