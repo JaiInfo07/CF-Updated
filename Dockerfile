@@ -3,9 +3,8 @@ FROM adobecoldfusion/coldfusion2021:latest
 
 # Accept EULA and set environment variables
 ENV acceptEULA=YES \
-    ADMIN_USER="admin" \
-    SECURITY_ENABLED="false" \
-    SECURE_PROFILE="false"
+    adminPassword="Admin@123" \
+    enableSecureProfile=NO
 
 # Set working directory
 WORKDIR /opt/coldfusion/cfusion/wwwroot
@@ -23,19 +22,21 @@ RUN unzip /tmp/build.zip -d /tmp/build && \
     rm -rf /tmp/build /tmp/build.zip
 
 # Copy configuration files
+COPY neo-security.xml /opt/coldfusion/cfusion/lib/neo-security.xml
 COPY server.xml /opt/coldfusion/cfusion/runtime/conf/server.xml
 
 # Install necessary ColdFusion packages
 RUN /opt/coldfusion/cfusion/bin/cfpm.sh install sqlserver debugger image mail
 
-# Copy additional configuration files and scripts
-COPY neo-security.xml.template /opt/coldfusion/cfusion/lib/neo-security.xml.template
+# Copy datasource setup script
 COPY datasource.cfm /opt/coldfusion/cfusion/wwwroot/WEB-INF/datasource.cfm
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
+
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Expose ColdFusion server port
 EXPOSE 8500
 
 # Set the entrypoint
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
