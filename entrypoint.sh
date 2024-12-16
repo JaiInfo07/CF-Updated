@@ -19,7 +19,7 @@ echo "ColdFusion server is running."
 
 # Execute the datasource setup script
 echo "Setting up datasource..."
-curl -X POST http://localhost:8500/WEB-INF/datasource.cfm || {
+curl -X POST http://localhost:8500/datasource.cfm || {
     echo "Datasource setup failed!"
     exit 1
 }
