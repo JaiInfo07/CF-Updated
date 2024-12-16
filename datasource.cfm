@@ -1,3 +1,4 @@
+
 <cfscript>
     // Credentials
     adminUsername = "admin";
@@ -15,16 +16,15 @@
     adminObj = createObject("component", "cfide.adminapi.administrator");
     adminObj.login(adminUsername);
 
-    // Add the datasource
+    // Add the datasource - fixing parameters order
     datasourceObj = createObject("component", "cfide.adminapi.datasource");
     datasourceObj.setMSSQL(
-        datasourceName, 
-        dbServer, 
-        dbName, 
-        dbUsername, 
-        dbPassword, 
-        dbPort, 
-        ""
+        name = datasourceName,       // CF Data Source Name
+        host = dbServer,             // Server
+        database = dbName,           // Database Name
+        username = dbUsername,       // Database Username
+        password = dbPassword,       // Database Password
+        port = dbPort,               // Database Port
+        description = ""             // Blank description
     );
 </cfscript>
-
