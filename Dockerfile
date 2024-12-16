@@ -36,7 +36,7 @@ RUN /opt/coldfusion/cfusion/bin/passwordreset.sh
 
 
 # Copy datasource setup script
-COPY datasource.cfm /opt/coldfusion/cfusion/wwwroot/WEB-INF/datasource.cfm
+COPY datasource.cfm /opt/coldfusion/cfusion/wwwroot/datasource.cfm
 
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
