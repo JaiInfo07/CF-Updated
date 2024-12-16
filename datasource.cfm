@@ -9,7 +9,7 @@
     dbPort = "1433";
     dbUsername = "SA";
     dbPassword = "Admin@123";
-    dbDriver = "Microsoft SQL Server";
+    dbDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
     // Login to ColdFusion Admin
     adminObj = createObject("component", "cfide.adminapi.administrator");
