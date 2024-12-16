@@ -3,7 +3,7 @@ adminObj = createObject("component", "cfide.adminapi.administrator");
 dataSourceObj = createObject("component", "cfide.adminapi.datasource");
 dataSourceObj.setMSSQL(
     "BillingSystem",
-    "18.61.61.171",
+    "13.61.145.48",
     1433,
     "BillingSystem",
     "SA",
