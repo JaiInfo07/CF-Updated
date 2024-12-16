@@ -99,7 +99,7 @@ jobs:
       - name: Push Docker Image
         run: |
           docker tag cold_fusion_app_new11:latest ${{ secrets.DOCKER_USERNAME }}/cold_fusion_app_new11:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/cold_fusion_app_new10:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/cold_fusion_app_new11:latest
 
       # - name: Set up kubeconfig
       #   run: |
