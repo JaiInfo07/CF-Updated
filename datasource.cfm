@@ -24,8 +24,7 @@
         dbUsername, 
         dbPassword, 
         dbPort, 
-        "", 
-        "OptionalDescription"
+        ""
     );
 </cfscript>
 
